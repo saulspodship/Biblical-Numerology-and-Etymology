@@ -1,0 +1,14 @@
+CREATE INDEX IF NOT EXISTS idx_lexeme_text ON lexeme(text);
+CREATE INDEX IF NOT EXISTS idx_lexeme_transliteration ON lexeme(transliteration);
+CREATE INDEX IF NOT EXISTS idx_lexeme_language ON lexeme(language);
+CREATE INDEX IF NOT EXISTS idx_lexeme_value_system_value ON lexeme_value(system_id, value);
+CREATE INDEX IF NOT EXISTS idx_verse_word_lexeme ON verse_word(lexeme_id);
+CREATE INDEX IF NOT EXISTS idx_verse_corpus_book ON verse(corpus_id, book, chapter, verse_no);
+CREATE INDEX IF NOT EXISTS idx_topic_category ON topic(category);
+CREATE INDEX IF NOT EXISTS idx_claim_topic_confidence ON claim(topic_id, confidence);
+CREATE INDEX IF NOT EXISTS idx_claim_source_source ON claim_source(source_id);
+CREATE INDEX IF NOT EXISTS idx_etymology_lexeme_step ON etymology_entry(lexeme_id, step_order);
+CREATE INDEX IF NOT EXISTS idx_user_query_timestamp ON user_query(timestamp DESC) WHERE deleted_at IS NULL;
+CREATE INDEX IF NOT EXISTS idx_saved_note_ref ON saved_note(ref_type, ref_id) WHERE deleted_at IS NULL;
+CREATE INDEX IF NOT EXISTS idx_baseline_system_value ON baseline_sample(system_id, value);
+INSERT OR IGNORE INTO schema_migration(version) VALUES (2);
